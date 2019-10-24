@@ -1,0 +1,19 @@
+﻿@model AdminMessageChainModel
+
+@{
+	Layout = null;
+}
+
+<vc:compose-message recipient="@Model.Recipient" origin="@string.Empty" parent-id="0" embedded="@true">
+</vc:compose-message>
+
+<div id="ExistingMessages">
+    @if (Model.Messages != null)
+	{
+		foreach (InternalMessage thisMessage in Model.Messages.OrderByDescending(m => m.DateCreated))
+		{
+            <vc:view-message id="@thisMessage.Guid">
+            </vc:view-message>
+		}
+	}
+</div>

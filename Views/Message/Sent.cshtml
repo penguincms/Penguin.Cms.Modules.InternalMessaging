@@ -1,0 +1,13 @@
+﻿@model List<InternalMessage>
+
+@{
+	ViewBag.Title = "Sent";
+	Layout = "_Layout";
+}
+
+<div class="sentMessages">
+    @foreach (InternalMessage thisMessage in Model.OrderByDescending(m => m.DateCreated))
+	{
+    <partial name="Preview" model="thisMessage" />
+	}
+</div>

@@ -1,0 +1,26 @@
+﻿@model List<InternalMessage>
+
+@{
+	Layout = "_Layout";
+}
+
+<div class="messageChain">
+    @foreach (InternalMessage message in Model.OrderBy(m => m.DateCreated))
+	{
+		string Source = "other";
+
+		if (message.Origin == UserSession.LoggedInUser.Guid)
+		{
+			Source = "me";
+		}
+
+    <div class="message @Source">
+        <div class="messageBody">
+            @message.Body
+        </div>
+        <div class="dateCreated">
+            @message.DateCreated
+        </div>
+    </div>
+	}
+</div>

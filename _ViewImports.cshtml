@@ -1,0 +1,17 @@
+﻿@using Penguin.Cms.Modules.InternalMessaging.Areas.Admin.Models
+@using Microsoft.AspNetCore.Html
+@using Penguin.Cms.Web.Extensions
+@using Penguin.Extensions.Collections;
+@using Penguin.Security.Abstractions.Extensions
+@using Penguin.Extensions.Strings
+@using Penguin.Security.Abstractions.Interfaces
+@using Penguin.Security.Abstractions
+@using Microsoft.Extensions.DependencyInjection
+@using Penguin.Cms.InternalMessaging
+
+@inject IServiceProvider ServiceProvider
+@inject IUserSession UserSession
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Penguin.Cms.Modules.Core
+@addTagHelper *, Penguin.Cms.Modules.InternalMessaging

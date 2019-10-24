@@ -1,0 +1,57 @@
+﻿@model InternalMessage
+
+@{
+    Layout = "_Layout";
+    Html.IncludeCSS("MessageTree");
+    Html.IncludeJS("MessageTree");
+
+    Func<InternalMessage, IHtmlContent> DisplayMessage = null;
+    DisplayMessage = this.Helper((InternalMessage message) =>
+
+    @<div class="messageWrapper">
+        <div class="message" data-guid="@message.Guid">
+            <a class="messageFrom" href="/v/@message.From">
+                @message.From
+            </a>
+            <div class="dateCreated">
+                @message.DateCreated
+            </div>
+            <div class="messageBody">
+                @message.Body
+            </div>
+            <div class="messageOptions">
+                @if (message.Children.Any())
+				{
+                <a href="#" class="messageMinimize">
+                    @Html.MaterialIcon("iso")
+                </a>
+				}
+                <a href="/Message/Compose/@message.Recipient?ParentId=@message._Id" data-recipient="@message.Recipient" data-parentid="@message._Id" class="replyMessage">
+                    Reply
+                </a>
+                <a href="/Chat/Open/@message.Origin" target="_blank" class="openDM">
+                    DM
+                </a>
+            </div>
+            <div class="optionsTarget">
+            </div>
+        </div>
+        <div class="messageReplies">
+            @foreach (InternalMessage child in message.Children)
+			{
+            @DisplayMessage(child)
+			}
+        </div>
+    </div>);
+}
+
+@if (Model.HasSubject)
+{
+<div class="messageSubject">
+    <h2>
+        @Model.Subject
+    </h2>
+</div>
+}
+
+@DisplayMessage(Model)

@@ -1,0 +1,47 @@
+﻿@model InternalMessage
+
+@{
+	ViewBag.Title = "View Message";
+
+	Layout = null;
+
+	List<InternalMessage> toDisplay = new List<InternalMessage>();
+
+	toDisplay.Add(Model);
+
+	InternalMessage thisMessage = Model;
+
+	while (thisMessage?.Parent != null)
+	{
+		toDisplay.Add(thisMessage.Parent);
+		thisMessage = thisMessage.Parent;
+	}
+
+	toDisplay.Reverse();
+}
+
+<div class="messageChain">
+    @foreach (InternalMessage message in toDisplay)
+	{
+		string Source = "other";
+
+		if (message.Origin == UserSession.LoggedInUser.Guid)
+		{
+			Source = "me";
+		}
+
+    <div class="message @Source">
+        <div class="MessageInfo">
+            <div class="createdBy">
+                @Model.From
+            </div>
+            <div class="dateCreated">
+                @Model.DateCreated
+            </div>
+        </div>
+        <div class="messageBody">
+            @Model.Body
+        </div>
+    </div>
+	}
+</div>

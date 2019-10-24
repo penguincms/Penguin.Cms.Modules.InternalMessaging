@@ -1,0 +1,18 @@
+﻿@model InternalMessage
+
+<div class="messagePreview @(!Model.Read ? "unread" : "read")">
+    <a href="/Message/ViewMessage/@Model.Guid">
+        <div class="to">
+            @Model.To
+        </div>
+        <div class="from">
+            @Model.From
+        </div>
+        <div class="dateCreated">
+            @Model.DateCreated
+        </div>
+        <div class="messageBody">
+            @Model.Subject
+        </div>
+    </a>
+</div>

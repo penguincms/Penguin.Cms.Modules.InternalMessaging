@@ -1,0 +1,60 @@
+﻿@model InternalMessage
+
+@{
+	ViewBag.Title = "Compose";
+	Layout = "_Layout";
+}
+
+<form method="Post" action="/Message/Compose">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Origin)
+    @Html.HiddenFor(m => m.Recipient)
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.Parent._Id)
+        @if (Model.Origin != UserSession.LoggedInUser.Guid)
+		{
+        <div class="form-group userRow">
+            @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-label col-md-2" }):
+            <div class="col-md-10">
+                @Model.From
+            </div>
+        </div>
+		}
+
+        <div class="form-group userRow">
+            @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" }):
+            <div class="col-md-10">
+                @Model.To
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
