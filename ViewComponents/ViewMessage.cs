@@ -11,12 +11,12 @@ namespace Penguin.Cms.Modules.InternalMessaging.ViewComponents
 
         public ViewMessage(MessageRepository messageRepository)
         {
-            MessageRepository = messageRepository;
+            this.MessageRepository = messageRepository;
         }
 
         public IViewComponentResult Invoke(Guid id)
         {
-            InternalMessage model = MessageRepository.GetMessageChain(id);
+            InternalMessage model = this.MessageRepository.GetMessageChain(id);
 
             if (model is null)
             {

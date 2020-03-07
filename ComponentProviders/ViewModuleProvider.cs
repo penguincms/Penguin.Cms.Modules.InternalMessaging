@@ -14,12 +14,12 @@ namespace Penguin.Cms.Modules.InternalMessaging.ComponentProviders
 
         public ViewModuleProvider(MessageRepository messageRepository)
         {
-            MessageRepository = messageRepository;
+            this.MessageRepository = messageRepository;
         }
 
         public IEnumerable<ViewModule> GetComponents(Entity Id)
         {
-            List<InternalMessage> messages = MessageRepository.GetByRecipient(Id.Guid);
+            List<InternalMessage> messages = this.MessageRepository.GetByRecipient(Id.Guid);
 
             AdminMessageChainModel model = new AdminMessageChainModel()
             {

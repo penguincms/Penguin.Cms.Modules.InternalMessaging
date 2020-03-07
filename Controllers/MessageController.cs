@@ -29,15 +29,18 @@ namespace Penguin.Cms.Modules.InternalMessaging.Controllers
 
         public MessageController(EntityPermissionsRepository entityPermissionsRepository, IRepository<SecurityGroup> securityGroupRepository, MessageRepository messageRepository, IUserSession userSession, IServiceProvider serviceProvider)
         {
-            EntityPermissionsRepository = entityPermissionsRepository;
-            UserSession = userSession;
-            MessageRepository = messageRepository;
-            ServiceProvider = serviceProvider;
-            SecurityGroupRepository = securityGroupRepository;
+            this.EntityPermissionsRepository = entityPermissionsRepository;
+            this.UserSession = userSession;
+            this.MessageRepository = messageRepository;
+            this.ServiceProvider = serviceProvider;
+            this.SecurityGroupRepository = securityGroupRepository;
         }
 
         [HttpGet]
-        public virtual ActionResult Compose(string Recipient, string? Origin = null, int ParentId = 0) => this.View(this.MessageRepository.Draft(Recipient, Origin, ParentId));
+        public virtual ActionResult Compose(string Recipient, string? Origin = null, int ParentId = 0)
+        {
+            return this.View(this.MessageRepository.Draft(Recipient, Origin, ParentId));
+        }
 
         [HttpPost]
         public virtual ActionResult Compose(InternalMessage model)
@@ -69,12 +72,12 @@ namespace Penguin.Cms.Modules.InternalMessaging.Controllers
             else
             {
                 //If its not a user, we need to be sure we have write access to the object since we dont know how it might be used
-                HasPermission = EntityPermissionsRepository.AllowsAccessType(model.Recipient, this.UserSession.LoggedInUser, PermissionTypes.Write);
+                HasPermission = this.EntityPermissionsRepository.AllowsAccessType(model.Recipient, this.UserSession.LoggedInUser, PermissionTypes.Write);
             }
 
             if (HasPermission)
             {
-                using IWriteContext context = MessageRepository.WriteContext();
+                using IWriteContext context = this.MessageRepository.WriteContext();
                 model = this.MessageRepository.SendMessage(model.Body, model.Subject, model.Recipient, model.Parent?._Id ?? 0, model.Origin);
             }
             else
@@ -136,7 +139,10 @@ namespace Penguin.Cms.Modules.InternalMessaging.Controllers
             return this.View(model);
         }
 
-        public virtual ActionResult ViewMessage(string Id) => this.View(Guid.Parse(Id));
+        public virtual ActionResult ViewMessage(string Id)
+        {
+            return this.View(Guid.Parse(Id));
+        }
 
         public ActionResult ViewTree(string Id)
         {

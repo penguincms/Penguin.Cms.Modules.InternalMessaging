@@ -9,12 +9,12 @@ namespace Penguin.Cms.Modules.InternalMessaging.ViewComponents
 
         public ComposeMessage(MessageRepository messageRepository)
         {
-            MessageRepository = messageRepository;
+            this.MessageRepository = messageRepository;
         }
 
         public IViewComponentResult Invoke(string recipient, string? origin = null, int parentId = 0)
         {
-            return this.View(MessageRepository.Draft(recipient, origin, parentId));
+            return this.View(this.MessageRepository.Draft(recipient, origin, parentId));
         }
     }
 }
