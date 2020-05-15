@@ -65,7 +65,7 @@ namespace Penguin.Cms.Modules.InternalMessaging.Controllers
 
             SecurityGroup target = this.SecurityGroupRepository.Find(model.Recipient);
 
-            if (this.UserSession.LoggedInUser.HasRole(RoleNames.SysAdmin) || target is IUser)
+            if (this.UserSession.LoggedInUser.HasRole(RoleNames.SYS_ADMIN) || target is IUser)
             {
                 //We allow
             }
