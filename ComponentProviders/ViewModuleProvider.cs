@@ -19,6 +19,11 @@ namespace Penguin.Cms.Modules.InternalMessaging.ComponentProviders
 
         public IEnumerable<ViewModule> GetComponents(Entity Id)
         {
+            if (Id is null)
+            {
+                throw new System.ArgumentNullException(nameof(Id));
+            }
+
             List<InternalMessage> messages = this.MessageRepository.GetByRecipient(Id.Guid);
 
             AdminMessageChainModel model = new AdminMessageChainModel()
