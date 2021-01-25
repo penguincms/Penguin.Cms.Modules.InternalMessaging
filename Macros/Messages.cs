@@ -30,7 +30,6 @@ namespace Penguin.Cms.Modules.InternalMessaging.Macros
             this.ViewRenderService = viewRenderService;
         }
 
-        [SuppressMessage("Design", "CA1054:Uri parameters should not be strings")]
         public HtmlString this[Guid Recipient]
         {
             get
