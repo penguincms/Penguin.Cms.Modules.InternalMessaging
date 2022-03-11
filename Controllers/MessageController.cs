@@ -9,7 +9,7 @@ using Penguin.Security.Abstractions;
 using Penguin.Security.Abstractions.Constants;
 using Penguin.Security.Abstractions.Extensions;
 using Penguin.Security.Abstractions.Interfaces;
-using Penguin.Shared.Objects.Extensions;
+using Penguin.Shared.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
