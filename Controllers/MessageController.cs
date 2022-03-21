@@ -37,10 +37,7 @@ namespace Penguin.Cms.Modules.InternalMessaging.Controllers
         }
 
         [HttpGet]
-        public virtual ActionResult Compose(string Recipient, string? Origin = null, int ParentId = 0)
-        {
-            return this.View(this.MessageRepository.Draft(Recipient, Origin, ParentId));
-        }
+        public virtual ActionResult Compose(string Recipient, string? Origin = null, int ParentId = 0) => this.View(this.MessageRepository.Draft(Recipient, Origin, ParentId));
 
         [HttpPost]
         public virtual ActionResult Compose(InternalMessage model)
@@ -139,10 +136,7 @@ namespace Penguin.Cms.Modules.InternalMessaging.Controllers
             return this.View(model);
         }
 
-        public virtual ActionResult ViewMessage(string Id)
-        {
-            return this.View(Guid.Parse(Id));
-        }
+        public virtual ActionResult ViewMessage(string Id) => this.View(Guid.Parse(Id));
 
         public ActionResult ViewTree(string Id)
         {
