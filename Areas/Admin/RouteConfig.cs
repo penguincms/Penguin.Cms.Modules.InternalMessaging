@@ -8,19 +8,19 @@ namespace Penguin.Cms.Modules.InternalMessaging.Areas.Admin
     {
         public void RegisterRoutes(IRouteBuilder routes)
         {
-            routes.MapRoute(
+            _ = routes.MapRoute(
                 name: "ComposeMessage",
                 template: "Message/Compose/{Recipient}/{Origin?}",
                 defaults: new { controller = "Message", action = "Compose" }
             );
 
-            routes.MapRoute(
+            _ = routes.MapRoute(
                 name: "MessageInbox",
                 template: "Message/Inbox/{SecurityGroupGuid?}",
                 defaults: new { controller = "Message", action = "Inbox" }
             );
 
-            routes.MapRoute(
+            _ = routes.MapRoute(
                 name: "MessageSent",
                 template: "Message/Sent/{SecurityGroupGuid?}",
                 defaults: new { controller = "Message", action = "Sent" }

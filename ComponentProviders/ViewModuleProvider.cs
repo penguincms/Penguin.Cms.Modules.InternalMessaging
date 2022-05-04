@@ -1,8 +1,8 @@
 ﻿using Penguin.Cms.Abstractions.Interfaces;
 using Penguin.Cms.Entities;
 using Penguin.Cms.InternalMessaging;
+using Penguin.Cms.InternalMessaging.Repositories;
 using Penguin.Cms.Modules.InternalMessaging.Areas.Admin.Models;
-using Penguin.Cms.Modules.InternalMessaging.Repositories;
 using Penguin.Cms.Web.Modules;
 using System.Collections.Generic;
 

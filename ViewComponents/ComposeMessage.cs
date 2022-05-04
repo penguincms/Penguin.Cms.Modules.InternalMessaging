@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Penguin.Cms.Modules.InternalMessaging.Repositories;
+using Penguin.Cms.InternalMessaging.Repositories;
 
 namespace Penguin.Cms.Modules.InternalMessaging.ViewComponents
 {
@@ -12,6 +12,9 @@ namespace Penguin.Cms.Modules.InternalMessaging.ViewComponents
             this.MessageRepository = messageRepository;
         }
 
-        public IViewComponentResult Invoke(string recipient, string? origin = null, int parentId = 0) => this.View(this.MessageRepository.Draft(recipient, origin, parentId));
+        public IViewComponentResult Invoke(string recipient, string? origin = null, int parentId = 0)
+        {
+            return this.View(this.MessageRepository.Draft(recipient, origin, parentId));
+        }
     }
 }

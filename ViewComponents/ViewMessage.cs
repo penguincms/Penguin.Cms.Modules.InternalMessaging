@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Penguin.Cms.InternalMessaging;
-using Penguin.Cms.Modules.InternalMessaging.Repositories;
+using Penguin.Cms.InternalMessaging.Repositories;
 using System;
 
 namespace Penguin.Cms.Modules.InternalMessaging.ViewComponents

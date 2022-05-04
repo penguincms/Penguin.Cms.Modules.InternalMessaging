@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Penguin.Cms.InternalMessaging;
-using Penguin.Cms.Modules.InternalMessaging.Repositories;
+using Penguin.Cms.InternalMessaging.Repositories;
 using Penguin.Cms.Security;
 using Penguin.Cms.Security.Repositories;
 using Penguin.Cms.Web.Extensions;
@@ -9,7 +9,7 @@ using Penguin.Security.Abstractions;
 using Penguin.Security.Abstractions.Constants;
 using Penguin.Security.Abstractions.Extensions;
 using Penguin.Security.Abstractions.Interfaces;
-using Penguin.Shared.Extensions;
+using Penguin.Shared.Objects.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +37,10 @@ namespace Penguin.Cms.Modules.InternalMessaging.Controllers
         }
 
         [HttpGet]
-        public virtual ActionResult Compose(string Recipient, string? Origin = null, int ParentId = 0) => this.View(this.MessageRepository.Draft(Recipient, Origin, ParentId));
+        public virtual ActionResult Compose(string Recipient, string? Origin = null, int ParentId = 0)
+        {
+            return this.View(this.MessageRepository.Draft(Recipient, Origin, ParentId));
+        }
 
         [HttpPost]
         public virtual ActionResult Compose(InternalMessage model)
@@ -136,7 +139,10 @@ namespace Penguin.Cms.Modules.InternalMessaging.Controllers
             return this.View(model);
         }
 
-        public virtual ActionResult ViewMessage(string Id) => this.View(Guid.Parse(Id));
+        public virtual ActionResult ViewMessage(string Id)
+        {
+            return this.View(Guid.Parse(Id));
+        }
 
         public ActionResult ViewTree(string Id)
         {
