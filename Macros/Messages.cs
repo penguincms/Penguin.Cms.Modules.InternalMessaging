@@ -25,22 +25,22 @@ namespace Penguin.Cms.Modules.InternalMessaging.Macros
 
         public Messages(HttpContext httpContext, MessageRepository messageRepository, IViewRenderService viewRenderService)
         {
-            this.HttpContext = httpContext;
-            this.MessageRepository = messageRepository;
-            this.ViewRenderService = viewRenderService;
+            HttpContext = httpContext;
+            MessageRepository = messageRepository;
+            ViewRenderService = viewRenderService;
         }
 
         public HtmlString this[Guid Recipient]
         {
             get
             {
-                List<InternalMessage> messages = this.MessageRepository.GetByRecipient(Recipient);
+                List<InternalMessage> messages = MessageRepository.GetByRecipient(Recipient);
 
                 string toReturn = string.Empty;
 
                 foreach (InternalMessage thisMessage in messages.OrderByDescending(m => m.DateCreated))
                 {
-                    Task<string> task = this.ViewRenderService.RenderToStringAsync("/Views/Shared/Components/ViewMessage/Default.cshtml", "", thisMessage, true);
+                    Task<string> task = ViewRenderService.RenderToStringAsync("/Views/Shared/Components/ViewMessage/Default.cshtml", "", thisMessage, true);
 
                     task.Wait();
 
@@ -53,21 +53,16 @@ namespace Penguin.Cms.Modules.InternalMessaging.Macros
 
         public List<Macro> GetMacros(object requester)
         {
-            if (requester is Entity e)
-            {
-                return new List<Macro>()
+            return requester is Entity e
+                ? new List<Macro>()
                 {
                         new Macro
-                        ( this.GetType().Name,
+                        ( GetType().Name,
                              $"@Messages[\"{e.Guid}\"]"
 
                         )
-                };
-            }
-            else
-            {
-                return new List<Macro>();
-            }
+                }
+                : new List<Macro>();
         }
     }
 }

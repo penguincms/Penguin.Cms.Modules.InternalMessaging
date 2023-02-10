@@ -14,7 +14,7 @@ namespace Penguin.Cms.Modules.InternalMessaging.ComponentProviders
 
         public ViewModuleProvider(MessageRepository messageRepository)
         {
-            this.MessageRepository = messageRepository;
+            MessageRepository = messageRepository;
         }
 
         public IEnumerable<ViewModule> GetComponents(Entity Id)
@@ -24,9 +24,9 @@ namespace Penguin.Cms.Modules.InternalMessaging.ComponentProviders
                 throw new System.ArgumentNullException(nameof(Id));
             }
 
-            List<InternalMessage> messages = this.MessageRepository.GetByRecipient(Id.Guid);
+            List<InternalMessage> messages = MessageRepository.GetByRecipient(Id.Guid);
 
-            AdminMessageChainModel model = new AdminMessageChainModel()
+            AdminMessageChainModel model = new()
             {
                 Messages = messages,
                 Recipient = Id.Guid
