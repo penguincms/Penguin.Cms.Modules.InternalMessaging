@@ -19,6 +19,7 @@ namespace Penguin.Cms.Modules.InternalMessaging.Controllers
     public class MessageController : Controller
     {
         protected EntityPermissionsRepository EntityPermissionsRepository { get; set; }
+
         protected MessageRepository MessageRepository { get; set; }
 
         protected IRepository<SecurityGroup> SecurityGroupRepository { get; set; }
